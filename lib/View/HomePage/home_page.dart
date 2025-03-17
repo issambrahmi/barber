@@ -13,25 +13,6 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: AppColors.primary1,
-        bottomNavigationBar: Container(
-          height: 50.h,
-          padding: EdgeInsets.symmetric(horizontal: 25.w),
-          decoration: const BoxDecoration(color: Colors.white, boxShadow: [
-            BoxShadow(
-              spreadRadius: 0,
-              blurRadius: 5,
-              color: Colors.black26,
-            )
-          ]),
-          child: const Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Icon(Icons.person),
-              Icon(Icons.home),
-              Icon(Icons.stairs),
-            ],
-          ),
-        ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {},
           backgroundColor: AppColors.second3,
@@ -39,13 +20,6 @@ class HomePage extends StatelessWidget {
             Icons.add,
             color: Colors.white,
           ),
-          // const Text(
-          //   'Ajouter une Reservation',
-          //   style: TextStyle(
-          //     fontWeight: FontWeight.bold,
-          //     color: Colors.white,
-          //   ),
-          // ),
         ),
         body: Column(
           children: [

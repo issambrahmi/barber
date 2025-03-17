@@ -1,5 +1,6 @@
 import 'package:barber_app/Core/Color/app_color.dart';
 import 'package:barber_app/View/HomePage/home_page.dart';
+import 'package:barber_app/View/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
           home: child,
         );
       },
-      child: const SafeArea(child: HomePage()),
+      child: const SafeArea(child: Home()),
     );
   }
 }
