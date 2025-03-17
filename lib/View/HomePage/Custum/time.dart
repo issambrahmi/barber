@@ -50,7 +50,7 @@ class HomePageTime extends StatelessWidget {
                           offset: Offset(0, 0),
                           blurRadius: 5,
                           spreadRadius: 0,
-                          color: Colors.black26,
+                          color: AppColors.primary2,
                         )
                       ]),
                   child: const Icon(

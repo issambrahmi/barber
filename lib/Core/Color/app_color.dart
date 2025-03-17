@@ -6,8 +6,5 @@ class AppColors {
 
   static const Color second1 = Color(0xFFf7f9fa);
   static const Color second2 = Color(0xFfe0e4e6);
-
-
-
-
+  static const Color second3 = Color.fromARGB(255, 72, 109, 131);
 }

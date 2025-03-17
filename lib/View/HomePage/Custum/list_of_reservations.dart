@@ -8,13 +8,13 @@ class HomePageResrvations extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-        child: ListView(
-      children: [
-        const HomePageTime(),
-        ...List.generate(10, (index) => const ReservationCard())
-      ],
-    ));
+    return SliverList.separated(
+      itemCount: 10,
+      separatorBuilder: (context, index) => SizedBox(height: 15.h),
+      itemBuilder: (BuildContext context, int index) {
+        return const ReservationCard();
+      },
+    );
   }
 }
 
@@ -159,7 +159,23 @@ class ReservationCard extends StatelessWidget {
               )
             ],
           ),
-          SizedBox(height: 5.h),
+          const Divider(),
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: 8.h),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Icon(Icons.comment),
+                SizedBox(width: 10.w),
+                const Text(
+                  'Sechoire ',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );
