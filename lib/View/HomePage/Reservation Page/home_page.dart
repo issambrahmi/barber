@@ -1,7 +1,8 @@
 import 'package:barber_app/Core/Color/app_color.dart';
-import 'package:barber_app/View/HomePage/Custum/date.dart';
-import 'package:barber_app/View/HomePage/Custum/list_of_reservations.dart';
-import 'package:barber_app/View/HomePage/Custum/time.dart';
+import 'package:barber_app/View/HomePage/Add%20Reservation%20Page/add_reservation_page.dart';
+import 'package:barber_app/View/HomePage/Reservation%20Page/Custum/date.dart';
+import 'package:barber_app/View/HomePage/Reservation%20Page/Custum/list_of_reservations.dart';
+import 'package:barber_app/View/HomePage/Reservation%20Page/Custum/time.dart';
 import 'package:barber_app/View/Shared/top_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -14,8 +15,11 @@ class HomePage extends StatelessWidget {
     return Scaffold(
         backgroundColor: AppColors.primary1,
         floatingActionButton: FloatingActionButton(
-          onPressed: () {},
-          backgroundColor: AppColors.second3,
+          onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => const AddNewReservationPage())),
+          backgroundColor: AppColors.primary2,
           child: const Icon(
             Icons.add,
             color: Colors.white,
@@ -24,7 +28,7 @@ class HomePage extends StatelessWidget {
         body: Column(
           children: [
             const AppTopBar(),
-            SizedBox(height: 20.h),
+            SizedBox(height: 10.h),
             Expanded(
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 15.w),

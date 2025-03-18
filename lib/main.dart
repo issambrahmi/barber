@@ -1,5 +1,5 @@
 import 'package:barber_app/Core/Color/app_color.dart';
-import 'package:barber_app/View/HomePage/home_page.dart';
+import 'package:barber_app/View/HomePage/Reservation%20Page/home_page.dart';
 import 'package:barber_app/View/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

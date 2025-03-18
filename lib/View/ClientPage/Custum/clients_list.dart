@@ -8,7 +8,7 @@ class ClientsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
-      padding: EdgeInsets.symmetric(horizontal: 15.w  , vertical: 10.h),
+      padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
       itemCount: 10,
       separatorBuilder: (context, index) => SizedBox(height: 15.h),
       itemBuilder: (context, index) => const ClientCard(),
@@ -97,7 +97,30 @@ class ClientCard extends StatelessWidget {
                     ],
                   )
                 ],
-              )
+              ),
+              const Spacer(),
+              Align(
+                alignment: Alignment.centerRight,
+                child: PopupMenuButton<String>(
+                  onSelected: (value) {
+                    // Perform actions based on the selected value
+                    if (value == 'details') {}
+                    if (value == 'delete') {}
+                  },
+                  itemBuilder: (BuildContext context) {
+                    return [
+                      const PopupMenuItem(
+                        value: 'details',
+                        child: Text('View more details'),
+                      ),
+                      const PopupMenuItem(
+                        value: 'delete',
+                        child: Text('Delete'),
+                      ),
+                    ];
+                  },
+                ),
+              ),
             ],
           )
         ],

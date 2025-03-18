@@ -1,5 +1,6 @@
-import 'package:barber_app/View/ClientPage/add.client_page.dart';
+import 'package:barber_app/View/HomePage/Add%20Reservation%20Page/add_reservation_page.dart';
 import 'package:barber_app/View/ClientPage/client_page.dart';
+import 'package:barber_app/View/HomePage/Reservation%20Page/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -9,26 +10,26 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // bottomNavigationBar: Container(
-      //   height: 50.h,
-      //   padding: EdgeInsets.symmetric(horizontal: 25.w),
-      //   decoration: const BoxDecoration(color: Colors.white, boxShadow: [
-      //     BoxShadow(
-      //       spreadRadius: 0,
-      //       blurRadius: 5,
-      //       color: Colors.black26,
-      //     )
-      //   ]),
-      //   child: const Row(
-      //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      //     children: [
-      //       Icon(Icons.person),
-      //       Icon(Icons.home),
-      //       Icon(Icons.stairs),
-      //     ],
-      //   ),
-      // ),
-      body: const AddClientPage(),
+      bottomNavigationBar: Container(
+        height: 50.h,
+        padding: EdgeInsets.symmetric(horizontal: 25.w),
+        decoration: const BoxDecoration(color: Colors.white, boxShadow: [
+          BoxShadow(
+            spreadRadius: 0,
+            blurRadius: 5,
+            color: Colors.black26,
+          )
+        ]),
+        child: const Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Icon(Icons.person),
+            Icon(Icons.home),
+            Icon(Icons.stairs),
+          ],
+        ),
+      ),
+      body: const ClientPage(),
     );
   }
 }

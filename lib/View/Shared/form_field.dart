@@ -27,8 +27,9 @@ class AppFormField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
       width: double.infinity,
+      margin: EdgeInsets.symmetric(horizontal: 5.w),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -45,6 +46,7 @@ class AppFormField extends StatelessWidget {
           ),
           SizedBox(height: 10.h),
           Container(
+            height: 50.h,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
                 boxShadow: const [

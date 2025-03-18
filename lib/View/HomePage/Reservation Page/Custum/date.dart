@@ -36,7 +36,8 @@ class _HomePageDateState extends State<HomePageDate> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 170.h,
+      height: null,
+      // height: 170,
       width: double.infinity,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
@@ -57,37 +58,49 @@ class _HomePageDateState extends State<HomePageDate> {
               color: AppColors.primary2,
               borderRadius: BorderRadius.circular(15),
             ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+            child: Stack(
               children: [
-                Icon(
-                  Icons.date_range_rounded,
-                  size: 20.sp,
-                  color: Colors.white,
-                ),
-                SizedBox(width: 10.w),
-                Text(
-                  'Mars 2025',
-                  style: TextStyle(
-                    fontSize: 18.sp,
-                    fontWeight: FontWeight.bold,
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: Icon(
+                    Icons.arrow_drop_down,
+                    size: 28.sp,
                     color: Colors.white,
                   ),
-                )
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.date_range_rounded,
+                      size: 20.sp,
+                      color: Colors.white,
+                    ),
+                    SizedBox(width: 10.w),
+                    Text(
+                      '2 Mars 2025',
+                      style: TextStyle(
+                        fontSize: 18.sp,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    )
+                  ],
+                ),
               ],
             ),
           ),
-          Expanded(
-            child: ListView.separated(
-                padding: EdgeInsets.all(10.sp),
-                scrollDirection: Axis.horizontal,
-                itemCount: days.length,
-                separatorBuilder: (context, index) => SizedBox(width: 5.w),
-                itemBuilder: (context, index) => DateCard(
-                      index: index,
-                      day: days[index],
-                    )),
-          )
+          // Expanded(
+          //   child: ListView.separated(
+          //       padding: EdgeInsets.all(10.sp),
+          //       scrollDirection: Axis.horizontal,
+          //       itemCount: days.length,
+          //       separatorBuilder: (context, index) => SizedBox(width: 5.w),
+          //       itemBuilder: (context, index) => DateCard(
+          //             index: index,
+          //             day: days[index],
+          //           )),
+          // )
         ],
       ),
     );

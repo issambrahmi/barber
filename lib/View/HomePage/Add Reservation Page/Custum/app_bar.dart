@@ -2,8 +2,8 @@ import 'package:barber_app/Core/Color/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class AddClientAppBar extends StatelessWidget {
-  const AddClientAppBar({super.key});
+class AddNewReservationAppBar extends StatelessWidget {
+  const AddNewReservationAppBar({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,17 +17,20 @@ class AddClientAppBar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Container(
-              height: 40.sp,
-              width: 40.sp,
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(15),
-                  boxShadow: const [
-                    BoxShadow(
-                        blurRadius: 10, spreadRadius: -1, color: Colors.black26)
-                  ]),
-              child: const Icon(Icons.arrow_back_ios_rounded)),
+          InkWell(
+            onTap: ()=>Navigator.pop(context),
+            child: Container(
+                height: 40.sp,
+                width: 40.sp,
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(15),
+                    boxShadow: const [
+                      BoxShadow(
+                          blurRadius: 10, spreadRadius: -1, color: Colors.black26)
+                    ]),
+                child: const Icon(Icons.arrow_back_ios_rounded)),
+          ),
           Container(
             height: 40.sp,
             padding: EdgeInsets.all(10.sp),

@@ -1,5 +1,5 @@
 import 'package:barber_app/Core/Color/app_color.dart';
-import 'package:barber_app/View/HomePage/Custum/time.dart';
+import 'package:barber_app/View/HomePage/Reservation%20Page/Custum/time.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -38,6 +38,8 @@ class ReservationCard extends StatelessWidget {
             )
           ]),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Row(
             children: [
@@ -119,7 +121,16 @@ class ReservationCard extends StatelessWidget {
               )
             ],
           ),
-          SizedBox(height: 10.h),
+          SizedBox(height: 20.h),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 10.h),
+            child: const Text(
+              'Sechoire ',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
           const Divider(),
           SizedBox(height: 5.h),
           Row(
@@ -133,7 +144,11 @@ class ReservationCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(60),
                   color: AppColors.second2,
                 ),
-                child: const Icon(Icons.phone),
+                child: Icon(
+                  Icons.phone,
+                  size: 22.sp,
+                  color: AppColors.primary2,
+                ),
               ),
               Container(
                 padding: EdgeInsets.all(10.sp),
@@ -159,23 +174,8 @@ class ReservationCard extends StatelessWidget {
               )
             ],
           ),
-          const Divider(),
-          Padding(
-            padding: EdgeInsets.symmetric(vertical: 8.h),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Icon(Icons.comment),
-                SizedBox(width: 10.w),
-                const Text(
-                  'Sechoire ',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
-            ),
-          ),
+          // const Divider(),
+          
         ],
       ),
     );
