@@ -1,4 +1,5 @@
 import 'package:barber_app/Core/Color/app_color.dart';
+import 'package:barber_app/View/ClientPage/Custum/add_client.dart';
 import 'package:barber_app/View/ClientPage/Custum/client_app_bar.dart';
 import 'package:barber_app/View/ClientPage/Custum/clients_list.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +13,7 @@ class ClientPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () => addNewCliente(context),
         backgroundColor: AppColors.second3,
         child: const Icon(
           Icons.add,
@@ -22,8 +23,18 @@ class ClientPage extends StatelessWidget {
       body: Column(
         children: [
           const ClientAppBar(),
-          SizedBox(height: 10.h),
-          const Expanded(child: ClientsList())
+          Expanded(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 15.w),
+              child: CustomScrollView(
+                slivers: [
+                  SliverToBoxAdapter(child: SizedBox(height: 10.h)),
+                  const ClientsList(),
+                  SliverToBoxAdapter(child: SizedBox(height: 70.h)),
+                ],
+              ),
+            ),
+          )
         ],
       ),
     );

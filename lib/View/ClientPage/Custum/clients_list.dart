@@ -7,8 +7,7 @@ class ClientsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.separated(
-      padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
+    return SliverList.separated(
       itemCount: 10,
       separatorBuilder: (context, index) => SizedBox(height: 15.h),
       itemBuilder: (context, index) => const ClientCard(),
@@ -104,18 +103,18 @@ class ClientCard extends StatelessWidget {
                 child: PopupMenuButton<String>(
                   onSelected: (value) {
                     // Perform actions based on the selected value
-                    if (value == 'details') {}
+                    if (value == 'edit') {}
                     if (value == 'delete') {}
                   },
                   itemBuilder: (BuildContext context) {
                     return [
                       const PopupMenuItem(
-                        value: 'details',
-                        child: Text('View more details'),
+                        value: 'edit',
+                        child: Text('Mofifier'),
                       ),
                       const PopupMenuItem(
                         value: 'delete',
-                        child: Text('Delete'),
+                        child: Text('suprimmer'),
                       ),
                     ];
                   },

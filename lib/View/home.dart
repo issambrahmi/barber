@@ -29,7 +29,7 @@ class Home extends StatelessWidget {
           ],
         ),
       ),
-      body: const ClientPage(),
+      body: const HomePage(),
     );
   }
 }

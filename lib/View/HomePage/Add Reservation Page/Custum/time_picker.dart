@@ -1,12 +1,16 @@
 import 'package:barber_app/Core/Color/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import '../../../../Controllers/add_new_reservation_controller.dart';
 
 class AppTimePicker extends StatelessWidget {
   const AppTimePicker({super.key});
 
   @override
   Widget build(BuildContext context) {
+    AddNewReservationController controller =
+        Get.find<AddNewReservationController>();
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 5.w),
       child: Column(
@@ -24,9 +28,9 @@ class AppTimePicker extends StatelessWidget {
           SizedBox(height: 10.h),
           InkWell(
             onTap: () async {
-              TimeOfDay? time = await showTimePicker(
+              controller.time = await showTimePicker(
                 context: context,
-                initialTime: TimeOfDay.now(),
+                initialTime: controller.time ?? TimeOfDay.now(),
                 builder: (context, child) {
                   return Theme(
                       data: ThemeData().copyWith(
@@ -36,7 +40,7 @@ class AppTimePicker extends StatelessWidget {
                       child: child!);
                 },
               );
-              print(time);
+              controller.update(['time picker']);
             },
             child: Container(
               height: 50.h,
@@ -62,14 +66,32 @@ class AppTimePicker extends StatelessWidget {
                     color: AppColors.primary2,
                   ),
                   SizedBox(width: 10.w),
-                  Text(
-                    'Select Time',
-                    style: TextStyle(
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.grey[600],
-                    ),
-                  )
+                  GetBuilder<AddNewReservationController>(
+                      id: 'time picker',
+                      builder: (controller) {
+                        return Text(
+                          controller.timeFormat(),
+                          style: TextStyle(
+                            fontSize: 14.sp,
+                            fontWeight: controller.time != null
+                                ? FontWeight.bold
+                                : FontWeight.w500,
+                            color: controller.time != null
+                                ? AppColors.primary2
+                                : Colors.grey[600],
+                          ),
+                        );
+                      }),
+                  const Spacer(),
+                  GetBuilder<AddNewReservationController>(
+                      id: 'time picker',
+                      builder: (controller) => controller.time != null
+                          ? Icon(
+                              Icons.check_circle_outline,
+                              size: 22.sp,
+                              color: AppColors.primary2,
+                            )
+                          : const SizedBox())
                 ],
               ),
             ),
