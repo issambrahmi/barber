@@ -124,7 +124,6 @@ class AddNewResrvationForm extends StatelessWidget {
                 validator: (txt) => appValidator(
                       value: txt.toString(),
                       maxLength: 100,
-                      minLength: 1,
                       isRequired: false,
                     )),
             SizedBox(height: 10.h),
