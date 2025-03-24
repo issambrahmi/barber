@@ -1,3 +1,4 @@
+import 'package:barber_app/Controllers/Home_page_controller.dart';
 import 'package:barber_app/Services/data_base.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -49,19 +50,26 @@ class AddNewReservationController extends GetxController {
 
   void addnewReservation() async {
     if (formKey.currentState!.validate()) {
-      String fromattedDate =
-          DateTime(date!.year, date!.month, date!.day, time!.hour, time!.minute)
-              .toIso8601String()
-              .replaceFirst('T', ' ')
-              .substring(0, 19);
-      AppDataBase db = AppDataBase();
-      bool result = await db.insert(
-          '''INSERT INTO Reservations (client_name , phone_number , comment , date) 
+      try {
+        String fromattedDate = DateTime(
+                date!.year, date!.month, date!.day, time!.hour, time!.minute)
+            .toIso8601String()
+            .replaceFirst('T', ' ')
+            .substring(0, 19);
+
+        AppDataBase db = AppDataBase();
+        bool result = await db.insert(
+            '''INSERT INTO Reservations (client_name, phone_number , comment , date) 
                VALUES ('${clientName.text.trim()}' , '${phoneNumber.text.trim()}' ,
                        '${comment.text.trim()}' , '$fromattedDate' );
-      ''');
-      if (result) {
-        print('added succesfully');
+            ''');
+        if (result) {
+          debugPrint('added succesfully');
+          Get.find<HomePageController>().getReservations();
+          Get.back();
+        }
+      } catch (e) {
+        debugPrint('======$e');
       }
     }
   }

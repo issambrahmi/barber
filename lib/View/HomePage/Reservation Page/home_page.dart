@@ -47,6 +47,9 @@ class HomePage extends StatelessWidget {
                       child: SizedBox(height: 30.h),
                     ),
                     const HomePageResrvations(),
+                    SliverToBoxAdapter(
+                      child: SizedBox(height: 60.h),
+                    ),
                   ],
                 ),
               ),

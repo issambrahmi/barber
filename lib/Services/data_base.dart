@@ -11,33 +11,38 @@ class AppDataBase {
 
   initDb() async {
     String path = await getDatabasesPath();
-    String fullPath = '$path/barberr.db}';
+    String fullPath = '$path/barber.db';
 
-    Database db = await openDatabase(fullPath, onCreate: _onCreate, version: 1);
+    Database db = await openDatabase(fullPath, version: 3, onCreate: _onCreate);
     await db.execute('PRAGMA foreign_keys = ON;');
     return db;
   }
 
   _onCreate(Database db, int version) async {
-    await db.execute('''
+    try {
+      await db.execute('''
     CREATE TABLE 'Clients' (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       name TEXT NOT NULL , 
-      phoneNumber TEXT  
+      phone_number TEXT  
     );
-
-    CREATE TABLE 'Reservations' (
+''');
+      await db.execute('''
+     CREATE TABLE 'Reservations' (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       client_name TEXT NOT NULL,
       phone_number TEXT ,
       comment TEXT ,
       date TEXT NOT NULL ,
+      state Text DEFAULT 'Waiting',
       client_id INTEGER , 
-      FOREIGN KEY(client_id) REFERENCES clients(id)
+      FOREIGN KEY(client_id) REFERENCES Clients(id)
     );
-  
 ''');
-    print('db created');
+      debugPrint('db created');
+    } catch (e) {
+      debugPrint('===============$e');
+    }
   }
 
   Future<bool> insert(String sql) async {
@@ -52,8 +57,13 @@ class AppDataBase {
   }
 
   Future<List<Map<String, Object?>>> read(String sql) async {
-    Database? myDb = await db;
-    return await myDb!.rawQuery(sql);
+    try {
+      Database? myDb = await db;
+      return await myDb!.rawQuery(sql);
+    } catch (e) {
+      debugPrint('=============$e');
+      return [];
+    }
   }
 
   Future<int> edit(String sql) async {
