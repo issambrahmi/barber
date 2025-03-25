@@ -13,7 +13,7 @@ class HomePageDate extends StatelessWidget {
     HomePageController controller = Get.find<HomePageController>();
     return InkWell(
         onTap: () async {
-          controller.selectedDate = await showDatePicker(
+          DateTime? date = await showDatePicker(
               context: context,
               initialDate: controller.selectedDate ?? DateTime.now(),
               firstDate: DateTime(2000),
@@ -26,8 +26,13 @@ class HomePageDate extends StatelessWidget {
                     ),
                     child: child!);
               });
-          controller.initDays();
-          controller.update(['home page date']);
+          if (date != null) {
+            controller.selectedDate = date;
+            controller.initDays();
+            controller.getReservations();
+            controller.update(['home page date']);
+            controller.update(['reservations']);
+          }
         },
         child: GetBuilder<HomePageController>(
           id: 'home page date',
@@ -120,38 +125,40 @@ class HomePageDate extends StatelessWidget {
   }
 }
 
-class DateCard extends StatefulWidget {
+class DateCard extends StatelessWidget {
   const DateCard({super.key, required this.index, required this.day});
 
   final int index;
   final String day;
 
   @override
-  State<DateCard> createState() => _DateCardState();
-}
-
-class _DateCardState extends State<DateCard> {
-  @override
   Widget build(BuildContext context) {
+    HomePageController controller = Get.find<HomePageController>();
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        controller.changeDateDay(index + 1);
+      },
       child: Container(
         height: double.infinity,
         width: 70.w,
         padding: EdgeInsets.symmetric(vertical: 5.h),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
-          color: widget.index == 0 ? AppColors.primary2 : Colors.white,
+          color: controller.selectedDate!.day == index + 1
+              ? AppColors.primary2
+              : Colors.white,
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              widget.day,
+              day,
               style: TextStyle(
                 fontSize: 13.sp,
                 fontWeight: FontWeight.bold,
-                color: widget.index == 0 ? Colors.white : AppColors.primary2,
+                color: controller.selectedDate!.day == index + 1
+                    ? Colors.white
+                    : AppColors.primary2,
               ),
             ),
             Container(
@@ -159,26 +166,31 @@ class _DateCardState extends State<DateCard> {
               width: 35.sp,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(60),
-                color: widget.index != 0 ? null : AppColors.second3,
+                color: controller.selectedDate!.day != index + 1
+                    ? null
+                    : AppColors.second3,
               ),
               child: Center(
                 child: Text(
-                  (widget.index + 1).toString(),
+                  (index + 1).toString(),
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 16.sp,
-                    color:
-                        widget.index == 0 ? Colors.white : AppColors.primary2,
+                    color: controller.selectedDate!.day == index + 1
+                        ? Colors.white
+                        : AppColors.primary2,
                   ),
                 ),
               ),
             ),
             Text(
-              'mars',
+              DateFormat('MMM').format(controller.selectedDate!),
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 13.sp,
-                color: widget.index == 0 ? Colors.white : AppColors.primary2,
+                color: controller.selectedDate!.day == index + 1
+                    ? Colors.white
+                    : AppColors.primary2,
               ),
             )
           ],

@@ -1,25 +1,38 @@
+import 'package:barber_app/Controllers/client_controller.dart';
 import 'package:barber_app/Core/Color/app_color.dart';
+import 'package:barber_app/Model/client_model.dart';
+import 'package:barber_app/View/ClientPage/Custum/add_client.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 class ClientsList extends StatelessWidget {
   const ClientsList({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return SliverList.separated(
-      itemCount: 10,
-      separatorBuilder: (context, index) => SizedBox(height: 15.h),
-      itemBuilder: (context, index) => const ClientCard(),
-    );
+    ClientController controller = Get.find<ClientController>();
+
+    return Obx(() => SliverList.separated(
+          itemCount: controller.clients.length,
+          separatorBuilder: (context, index) => SizedBox(height: 15.h),
+          itemBuilder: (context, index) => ClientCard(
+            client: controller.clients[index],
+            index: index,
+          ),
+        ));
   }
 }
 
 class ClientCard extends StatelessWidget {
-  const ClientCard({super.key});
+  const ClientCard({super.key, required this.client, required this.index});
 
+  final ClientModel client;
+  final int index;
   @override
   Widget build(BuildContext context) {
+    ClientController controller = Get.find<ClientController>();
+
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 15),
       margin: EdgeInsets.symmetric(horizontal: 5.w),
@@ -55,7 +68,7 @@ class ClientCard extends StatelessWidget {
                     ]),
                 child: Center(
                   child: Text(
-                    'A',
+                    client.name[0],
                     style: TextStyle(
                       fontSize: 17.sp,
                       fontWeight: FontWeight.bold,
@@ -70,7 +83,7 @@ class ClientCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Brahmi issam',
+                    client.name,
                     style: TextStyle(
                       fontSize: 18.sp,
                       fontWeight: FontWeight.bold,
@@ -86,7 +99,7 @@ class ClientCard extends StatelessWidget {
                       ),
                       SizedBox(width: 5.w),
                       Text(
-                        '0541071957',
+                        client.phoneNumber.toString(),
                         style: TextStyle(
                           fontSize: 12.sp,
                           fontWeight: FontWeight.bold,
@@ -103,8 +116,15 @@ class ClientCard extends StatelessWidget {
                 child: PopupMenuButton<String>(
                   onSelected: (value) {
                     // Perform actions based on the selected value
-                    if (value == 'edit') {}
-                    if (value == 'delete') {}
+                    if (value == 'edit') {
+                      controller.clientName.text = client.name;
+                      controller.phoneNumber.text =
+                          client.phoneNumber.toString();
+                      addNewCliente(context, false, client.id);
+                    }
+                    if (value == 'delete') {
+                      controller.deleteClient(client.id);
+                    }
                   },
                   itemBuilder: (BuildContext context) {
                     return [

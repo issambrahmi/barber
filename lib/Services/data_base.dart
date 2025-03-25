@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:sqflite/sqflite.dart';
 
 class AppDataBase {
@@ -66,13 +67,25 @@ class AppDataBase {
     }
   }
 
-  Future<int> edit(String sql) async {
-    Database? myDb = await db;
-    return await myDb!.rawUpdate(sql);
+  Future<bool> edit(String sql) async {
+    try {
+      Database? myDb = await db;
+      await myDb!.rawUpdate(sql);
+      return true;
+    } catch (e) {
+      debugPrint('=========$e');
+      return false;
+    }
   }
 
-  Future<int> delete(String sql) async {
-    Database? myDb = await db;
-    return await myDb!.rawDelete(sql);
+  Future<bool> delete(String sql) async {
+    try {
+      Database? myDb = await db;
+      await myDb!.rawDelete(sql);
+      return true;
+    } catch (e) {
+      debugPrint('=========$e');
+      return false;
+    }
   }
 }

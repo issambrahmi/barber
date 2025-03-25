@@ -1,6 +1,8 @@
+import 'package:barber_app/Controllers/client_controller.dart';
 import 'package:barber_app/Core/Color/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 class ClientAppBar extends StatelessWidget {
   const ClientAppBar({super.key});
@@ -20,20 +22,21 @@ class ClientAppBar extends StatelessWidget {
           children: [
             SizedBox(width: 20.w),
             Container(
-              height: 40.sp,
-              padding: EdgeInsets.all(10.sp),
-              decoration: BoxDecoration(
-                color: AppColors.second2,
-                borderRadius: BorderRadius.circular(30),
-              ),
-              child: Text(
-                '10 Clients',
-                style: TextStyle(
-                  fontSize: 15.sp,
-                  fontWeight: FontWeight.bold,
+                height: 40.sp,
+                padding: EdgeInsets.all(10.sp),
+                decoration: BoxDecoration(
+                  color: AppColors.second2,
+                  borderRadius: BorderRadius.circular(30),
                 ),
-              ),
-            ),
+                child: Obx(
+                  () => Text(
+                    '${Get.find<ClientController>().clients.length} Clients',
+                    style: TextStyle(
+                      fontSize: 15.sp,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                )),
             Container(
                 height: 40.sp,
                 width: 40.sp,

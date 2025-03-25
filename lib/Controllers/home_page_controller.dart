@@ -1,7 +1,6 @@
 import 'package:barber_app/Model/reservation_model.dart';
 import 'package:barber_app/Services/data_base.dart';
 import 'package:get/get.dart';
-import 'package:get/get_rx/get_rx.dart';
 import 'package:intl/intl.dart';
 
 class HomePageController extends GetxController {
@@ -16,7 +15,7 @@ class HomePageController extends GetxController {
   @override
   void onInit() async {
     selectedDate = DateTime.now();
-    days.value = initDays();
+    initDays();
     getReservations();
     super.onInit();
   }
@@ -28,7 +27,13 @@ class HomePageController extends GetxController {
     }
   }
 
-  List<String> initDays() {
+  void changeDateDay(int day) {
+    selectedDate = DateTime(selectedDate!.year, selectedDate!.month, day);
+    update(['home page date']);
+  }
+
+  initDays() {
+    days.clear();
     DateTime firstDayofMounth =
         DateTime(selectedDate!.year, selectedDate!.month, 1);
     DateTime firstDayOfNextMounth =
@@ -36,13 +41,10 @@ class HomePageController extends GetxController {
     DateTime lastDayOfMounth =
         firstDayOfNextMounth.subtract(const Duration(days: 1));
 
-    List<String> days = [];
     for (int i = 0; i < lastDayOfMounth.day; i++) {
       DateTime currentDay = firstDayofMounth.add(Duration(days: i));
       days.add(DateFormat('EEEE').format(currentDay));
     }
-    print(days.length);
-    return days;
   }
 
   void getReservations() async {

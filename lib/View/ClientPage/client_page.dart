@@ -1,19 +1,22 @@
+import 'package:barber_app/Controllers/client_controller.dart';
 import 'package:barber_app/Core/Color/app_color.dart';
 import 'package:barber_app/View/ClientPage/Custum/add_client.dart';
 import 'package:barber_app/View/ClientPage/Custum/client_app_bar.dart';
 import 'package:barber_app/View/ClientPage/Custum/clients_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 class ClientPage extends StatelessWidget {
   const ClientPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    Get.put(ClientController());
     return Scaffold(
       backgroundColor: Colors.white,
       floatingActionButton: FloatingActionButton(
-        onPressed: () => addNewCliente(context),
+        onPressed: () => addNewCliente(context, true, null),
         backgroundColor: AppColors.second3,
         child: const Icon(
           Icons.add,
