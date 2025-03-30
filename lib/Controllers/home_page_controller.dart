@@ -11,6 +11,8 @@ class HomePageController extends GetxController {
   RxBool isFullDateShow = false.obs;
   RxBool isLongPress = false.obs;
   RxInt? indexLongPressed;
+  DateTime helperDate = DateTime.now();
+  List<int> printedDates = [];
 
   @override
   void onInit() async {
@@ -52,7 +54,7 @@ class HomePageController extends GetxController {
     List<Map<String, dynamic>> list =
         await db.read('''SELECT * FROM Reservations 
         WHERE strftime('%Y-%m-%d' , date) = '${DateFormat('yyyy-MM-dd').format(selectedDate!)}' 
-        ORDER BY strftime('%H:%M' , date) DESC;
+        ORDER BY strftime('%H:%M' , date) ASC;
      ''');
 
     reservations

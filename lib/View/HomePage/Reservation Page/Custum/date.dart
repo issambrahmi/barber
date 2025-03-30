@@ -30,6 +30,8 @@ class HomePageDate extends StatelessWidget {
             controller.selectedDate = date;
             controller.initDays();
             controller.getReservations();
+            controller.helperDate = DateTime.now();
+            controller.printedDates.clear();
             controller.update(['home page date']);
             controller.update(['reservations']);
           }

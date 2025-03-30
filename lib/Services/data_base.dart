@@ -36,8 +36,26 @@ class AppDataBase {
       comment TEXT ,
       date TEXT NOT NULL ,
       state Text DEFAULT 'Waiting',
+      totale_price REAL ,
+      remise_price REAL,
       client_id INTEGER , 
       FOREIGN KEY(client_id) REFERENCES Clients(id)
+    );
+''');
+      await db.execute('''
+     CREATE TABLE 'Types' (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      name TEXT NOT NULL,
+      price REAL NOT NULL,
+    );
+''');
+      await db.execute('''
+     CREATE TABLE 'ReservationTypes' (
+      id INTEGER PRIMARY KEY AUTOINCREMENT ,
+      type_id INTEGER NOT NULL ,
+      reservation_id INTEGER NOT NULL ,
+      FOREIGN KEY(type_id) REFERENCES Types(id),
+      FOREIGN KEY(reservation_id) REFERENCES Reservations(id)
     );
 ''');
       debugPrint('db created');
