@@ -43,19 +43,23 @@ class AppDataBase {
     );
 ''');
       await db.execute('''
-     CREATE TABLE 'Types' (
+     CREATE TABLE 'Services' (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       name TEXT NOT NULL,
-      price REAL NOT NULL,
+      price REAL NOT NULL
     );
 ''');
       await db.execute('''
-     CREATE TABLE 'ReservationTypes' (
+     CREATE TABLE 'ReservationServices' (
       id INTEGER PRIMARY KEY AUTOINCREMENT ,
-      type_id INTEGER NOT NULL ,
+      service_id INTEGER NOT NULL ,
       reservation_id INTEGER NOT NULL ,
-      FOREIGN KEY(type_id) REFERENCES Types(id),
+      FOREIGN KEY(service_id) REFERENCES Services(id)
+      ON DELETE CASCADE
+      ON UPDATE CASCADE,
       FOREIGN KEY(reservation_id) REFERENCES Reservations(id)
+      ON DELETE CASCADE
+      ON UPDATE CASCADE
     );
 ''');
       debugPrint('db created');

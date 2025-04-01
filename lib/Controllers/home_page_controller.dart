@@ -5,7 +5,8 @@ import 'package:intl/intl.dart';
 
 class HomePageController extends GetxController {
   RxList days = <String>[].obs;
-  RxList reservations = <ReservationModel>[].obs;
+  RxList<ReservationModel> reservations = <ReservationModel>[].obs;
+
   DateTime? selectedDate;
   RxBool isMorning = true.obs;
   RxBool isFullDateShow = false.obs;
@@ -59,7 +60,23 @@ class HomePageController extends GetxController {
 
     reservations
         .assignAll(list.map((r) => ReservationModel.fromMap(r)).toList());
+
+    List<Map<String, dynamic>> listOfServices = await db
+        .read('''SELECT Rs.id , Rs.reservation_id , s.name As service_name
+        FROM ReservationServices Rs 
+        JOIN Services s ON s.id = Rs.service_id 
+        JOIN Reservations r ON r.id = Rs.reservation_id
+        WHERE strftime('%Y-%m-%d' , r.date) = '${DateFormat('yyyy-MM-dd').format(selectedDate!)}' 
+        ORDER BY strftime('%H:%M' , date) ASC
+        ;
+     ''');
+    for (var s in listOfServices) {
+      ReservationServiceModel service = ReservationServiceModel.fromMap(s);
+      reservations[service.reservationId].services.add(service);
+    }
+
     update(['reservations']);
+
     print(reservations.length);
   }
 }
