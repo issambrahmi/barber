@@ -46,12 +46,13 @@ class HomePage extends StatelessWidget {
                     SliverToBoxAdapter(
                       child: SizedBox(height: 30.h),
                     ),
-                    GetBuilder<HomePageController>(
-                      id: 'reservations',
-                      builder: (controller) {
-                        return const HomePageResrvations();
-                      }
-                    ),
+                    // GetBuilder<HomePageController>(
+                    //   id: 'reservations',
+                    //   builder: (controller) {
+                    //     return const HomePageResrvations();
+                    //   }
+                    // ),
+                    const HomePageResrvations(),
                     SliverToBoxAdapter(
                       child: SizedBox(height: 60.h),
                     ),

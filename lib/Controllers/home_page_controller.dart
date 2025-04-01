@@ -11,7 +11,7 @@ class HomePageController extends GetxController {
   RxBool isMorning = true.obs;
   RxBool isFullDateShow = false.obs;
   RxBool isLongPress = false.obs;
-  RxInt? indexLongPressed;
+  int indexShowMoreInfo = -1;
   DateTime helperDate = DateTime.now();
   List<int> printedDates = [];
 
@@ -75,7 +75,7 @@ class HomePageController extends GetxController {
       reservations[service.reservationId].services.add(service);
     }
 
-    update(['reservations']);
+   // update(['reservations']);
 
     print(reservations.length);
   }
