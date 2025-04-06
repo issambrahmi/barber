@@ -35,7 +35,7 @@ class AppDataBase {
       phone_number TEXT ,
       comment TEXT ,
       date TEXT NOT NULL ,
-      state Text DEFAULT 'Waiting',
+      state Text DEFAULT 'waiting',
       totale_price REAL ,
       remise_price REAL,
       client_id INTEGER , 

@@ -18,7 +18,8 @@ class HomePage extends StatelessWidget {
     return Scaffold(
         backgroundColor: AppColors.primary1,
         floatingActionButton: FloatingActionButton(
-          onPressed: () => Get.to(() => const AddNewReservationPage()),
+          onPressed: () => Get.to(() => const AddNewReservationPage(),
+              arguments: {'res': null}),
           backgroundColor: AppColors.primary2,
           child: const Icon(
             Icons.add,

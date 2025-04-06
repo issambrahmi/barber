@@ -1,15 +1,12 @@
-import 'package:barber_app/Model/services_model.dart';
-import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-
 class ReservationModel {
   final int id;
   final String name;
   final String? phoneNumber;
   final String comment;
-  final String state;
+  String state;
   final DateTime date;
   final int? clientId;
+  final double totalPrice;
   final List<ReservationServiceModel> services;
 
   ReservationModel({
@@ -20,6 +17,7 @@ class ReservationModel {
     required this.state,
     required this.date,
     this.clientId,
+    required this.totalPrice,
     required this.services,
   });
   factory ReservationModel.fromMap(Map<String, dynamic> map) {
@@ -34,6 +32,7 @@ class ReservationModel {
       state: map['state'],
       date: formattedDate,
       clientId: map['client_id'],
+      totalPrice: map['totale_price'],
       services: [],
     );
   }

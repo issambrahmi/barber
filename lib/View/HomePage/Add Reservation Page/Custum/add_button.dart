@@ -9,8 +9,16 @@ class AddNewResrvationButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AddNewReservationController controller =
+        Get.find<AddNewReservationController>();
     return InkWell(
-      onTap: () => Get.find<AddNewReservationController>().addnewReservation(),
+      onTap: () {
+        if (controller.isAddPage) {
+          controller.addnewReservation();
+        } else {
+          controller.editReservation();
+        }
+      },
       child: Container(
         height: 50.h,
         width: double.infinity,
@@ -29,7 +37,9 @@ class AddNewResrvationButton extends StatelessWidget {
             ),
             SizedBox(width: 10.w),
             Text(
-              'Confirmer Reservation',
+              Get.find<AddNewReservationController>().isAddPage
+                  ? 'Confirmer Reservation'
+                  : 'Confirmer Modification',
               style: TextStyle(
                 fontSize: 16.sp,
                 color: Colors.white,

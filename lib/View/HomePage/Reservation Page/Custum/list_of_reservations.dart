@@ -1,6 +1,8 @@
 import 'package:barber_app/Controllers/Home_page_controller.dart';
 import 'package:barber_app/Core/Color/app_color.dart';
 import 'package:barber_app/Model/reservation_model.dart';
+import 'package:barber_app/View/HomePage/Add%20Reservation%20Page/add_reservation_page.dart';
+import 'package:barber_app/View/HomePage/Reservation%20Page/Custum/validate_reservation_dialogue.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -77,22 +79,22 @@ class ReservationCard extends StatelessWidget {
               ),
             )
           : const SizedBox(),
-      Container(
-        margin: EdgeInsets.symmetric(horizontal: 5.w),
-        decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(15),
-            boxShadow: const [
-              BoxShadow(
-                offset: Offset(0, 0),
-                blurRadius: 5,
-                spreadRadius: 0,
-                color: Colors.black26,
-              )
-            ]),
-        child: Stack(
-          children: [
-            Padding(
+      Stack(
+        children: [
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 5.w),
+            decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(15),
+                boxShadow: const [
+                  BoxShadow(
+                    offset: Offset(0, 0),
+                    blurRadius: 5,
+                    spreadRadius: 0,
+                    color: Colors.black26,
+                  )
+                ]),
+            child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 15.h),
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -232,7 +234,7 @@ class ReservationCard extends StatelessWidget {
                           ),
                         ],
                       ),
-                      if (reservation.state != 'finish')
+                      if (reservation.state == 'finish')
                         GetBuilder<HomePageController>(
                             id: 'show more',
                             builder: (controller) => controller
@@ -275,7 +277,7 @@ class ReservationCard extends StatelessWidget {
                                         children: [
                                           ...List.generate(
                                               //reservation.services.length,
-                                              2,
+                                              reservation.services.length,
                                               (i) => Container(
                                                     padding:
                                                         EdgeInsets.all(5.sp),
@@ -286,7 +288,7 @@ class ReservationCard extends StatelessWidget {
                                                               5),
                                                     ),
                                                     child: Text(
-                                                      'degrade 0',
+                                                      reservation.services[index].serviceName,
                                                       style: TextStyle(
                                                         fontSize: 12.sp,
                                                         fontWeight:
@@ -310,7 +312,7 @@ class ReservationCard extends StatelessWidget {
                                           ),
                                           const Spacer(),
                                           Text(
-                                            '500 DA',
+                                            '${reservation.totalPrice.toStringAsFixed(0)} DA',
                                             style: TextStyle(
                                               fontSize: 15.sp,
                                               fontWeight: FontWeight.bold,
@@ -322,59 +324,62 @@ class ReservationCard extends StatelessWidget {
                                       SizedBox(height: 5.h),
                                     ],
                                   ))
-                    ]))
-          ],
-        ),
-      ),
-      Align(
-        alignment: Alignment.centerRight,
-        child: PopupMenuButton<String>(
-          onSelected: (value) {
-            // Perform actions based on the selected value
-            // if (value == 'edit') {
-            //   controller.clientName.text = client.name;
-            //   controller.phoneNumber.text = client.phoneNumber.toString();
-            //   addNewCliente(context, false, client.id);
-            // }
-            // if (value == 'delete') {
-            //   controller.deleteClient(client.id);
-            // }
-          },
-          itemBuilder: (BuildContext context) {
-            return [
-              const PopupMenuItem(
-                value: 'validate',
-                child: Text(
-                  'Valider',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.green,
+                    ])),
+          ),
+          Align(
+            alignment: Alignment.topRight,
+            child: PopupMenuButton<String>(
+              onSelected: (value) {
+                if (value == 'validate') {
+                  validateReservationDialogue(context , index);
+                  //controller.deleteReservation(reservation.id, index);
+                }
+                if (value == 'edit') {
+                  Get.to(() => const AddNewReservationPage(),
+                      arguments: {'res': reservation});
+                }
+                if (value == 'delete') {
+                  controller.deleteReservation(reservation.id, index);
+                }
+              },
+              itemBuilder: (BuildContext context) {
+                return [
+                  if (reservation.state == 'waiting')
+                    const PopupMenuItem(
+                      value: 'validate',
+                      child: Text(
+                        'Valider',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.green,
+                        ),
+                      ),
+                    ),
+                  const PopupMenuItem(
+                    value: 'edit',
+                    child: Text(
+                      'Mofifier',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.orange,
+                      ),
+                    ),
                   ),
-                ),
-              ),
-              const PopupMenuItem(
-                value: 'edit',
-                child: Text(
-                  'Mofifier',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.orange,
+                  const PopupMenuItem(
+                    value: 'delete',
+                    child: Text(
+                      'suprimmer',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.red,
+                      ),
+                    ),
                   ),
-                ),
-              ),
-              const PopupMenuItem(
-                value: 'delete',
-                child: Text(
-                  'suprimmer',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.red,
-                  ),
-                ),
-              ),
-            ];
-          },
-        ),
+                ];
+              },
+            ),
+          ),
+        ],
       ),
     ]);
   }

@@ -1,5 +1,3 @@
-import 'package:barber_app/View/HomePage/Add%20Reservation%20Page/add_reservation_page.dart';
-import 'package:barber_app/View/ClientPage/client_page.dart';
 import 'package:barber_app/View/HomePage/Reservation%20Page/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
