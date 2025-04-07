@@ -1,4 +1,5 @@
 import 'package:barber_app/View/HomePage/Reservation%20Page/home_page.dart';
+import 'package:barber_app/View/StatisticPage/statistic_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
           home: child,
         );
       },
-      child: const SafeArea(child: HomePage()),
+      child: const SafeArea(child: StatisticPage()),
     );
   }
 }

@@ -11,4 +11,13 @@ class AppColors {
 
   static const Gradient gradient1 =
       LinearGradient(colors: [primary222, second3]);
+
+  static const LinearGradient gardient2 = LinearGradient(
+    colors: [
+      Color(0xFF2C3E50), // your original color
+      Color(0xFF4CA1AF), // a medium steel blue-gray
+    ],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+  );
 }
